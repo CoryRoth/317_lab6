@@ -6,7 +6,7 @@ public class CheckingAccount {
 	static final int MaxWithdrawPerDay = 500;
 	
 	private int balance;
-
+	private int accountNumber;
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
@@ -17,10 +17,18 @@ public class CheckingAccount {
 	}
 
 	public void deposit(int value) {
+		
+		//TODO CHECK FOR VALID INPUT
+		//TODO check for max deposit
+		this.balance += value;
 
 	}
 	
 	public void withdraw (int value) {
+		
+		//TODO CHECK FOR VALID INPUT
+		//TODO check for max deposit
+		this.balance -= value;
 		
 	}
 	
