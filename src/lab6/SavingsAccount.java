@@ -15,6 +15,9 @@ public class SavingsAccount {
 	public SavingsAccount() {
 		this.balance=0;
 	}
+	public SavingsAccount(int balance) {
+		this.balance=balance;
+	}
 
 	public void deposit(int value) {
 		

@@ -3,6 +3,11 @@ package lab6;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class User {
 
@@ -17,17 +22,29 @@ public class User {
 	
 	//New User
 	public User(String username) {
-		this.checkingAccount = new CheckingAccount();
-		this.savingsAccount = new SavingsAccount();
 		this.pathToFile = username;
+		this.checkingAccount = new CheckingAccount(username);
+		this.savingsAccount = new SavingsAccount();
 		createUserFiles(pathToFile);
 	}
+	
+
+	//Old user
+	public User(String username,String pathToFile) {
+	
+		
+	}
+	
 	
 	private void createUserFiles(String filename) {
 		try {
 			File myObj = new File("Users/" + filename +".txt");
 			if (myObj.createNewFile()) {
 				System.out.println("File created: " + myObj.getName());
+				FileWriter fr = new FileWriter(myObj, true);
+				fr.write("Checking Balance: " + 0 + "\n");
+				fr.write("Savings Balance: " + 0 + "\n");
+				fr.close();
 			} else {
 				System.out.println("File already exists.");
 			}
@@ -35,11 +52,6 @@ public class User {
 			System.out.println("An error occurred.");
 			e.printStackTrace();
 		}
-	}
-
-	//Old user
-	public User(String username,String pathToFile) {
-		
 	}
 	
 	

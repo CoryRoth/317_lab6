@@ -18,13 +18,14 @@ public class Interface {
 		String pathToFile = null;
 		//TODO find if new user or old user
 		Boolean oldUser=isNewUser(name);
+		User user = null;
 		if(oldUser) {
-			User user=  new User(name,pathToFile);
+			user=  new User(name,pathToFile);
 			//Welcome back
 			
 		}
 		else {
-			User user = new User(name);
+			user = new User(name);
 			//New User
 			//Make New checking account
 			
@@ -35,13 +36,18 @@ public class Interface {
 			//Login
 			
 			
-			System.out.println("What action would you like to do?\n 1 for Deposit, 2 for Withdraw, 3 for transfer, 4 to access Utilities Screen, -1 to Exit");
+			System.out.println("What action would you like to do?\n 0 to Check Balance, 1 for Deposit, 2 for Withdraw, 3 for transfer, 4 to access Utilities Screen, -1 to Exit");
 
 			int choice = myObj.nextInt();
 			
 			if(choice ==1) {
 				//SHOW Deposit Interface
-				DepositInterface();
+				BalanceInterface();
+			}
+			
+			if(choice ==1) {
+				//SHOW Deposit Interface
+				DepositInterface(user);
 			}
 			else if (choice ==2) {
 				//Show Withdraw Interface
@@ -77,6 +83,13 @@ public class Interface {
 	
 	
 	
+	private static void BalanceInterface() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
 	private static Boolean isNewUser(String name) {
 		File folder = new File("Users/");
 		File[] listOfFiles = folder.listFiles();
@@ -115,9 +128,26 @@ public class Interface {
 
 
 
-	private static void DepositInterface() {
+	private static void DepositInterface(User user) {
 		// TODO Auto-generated method stub
-		
+		Scanner myObj = new Scanner(System.in); // Create a Scanner object
+
+		Boolean exit = false;
+		while (!exit) {
+			System.out.println("Deposit\n Enter 1 for Checking, 2 for Savings, -1 to return");
+			int choice = myObj.nextInt();
+			if(choice ==1) {
+				System.out.println("Enter How much you would like to deposit");
+				int amount = myObj.nextInt();
+				user.checkingAccount.deposit(amount);
+			}
+			else if(choice ==2) {
+				
+			}
+			else if(choice ==-1) {
+				break;
+			}
+		}
 	}
 
 

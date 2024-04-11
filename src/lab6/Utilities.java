@@ -27,10 +27,11 @@ public class Utilities {
 		return output;
 	}
 
+	//TODO FIX
 	private void createFileForAccount(String numString, String Account, String username, String password) {
 		if (Account.equals("Checking")) {
 			try {
-				File myObj = new File("Accounts/" + username + "_" + numString + "_" + "checking.txt");
+				File myObj = new File("Utilities/" + username + "_" + numString + "_" + "checking.txt");
 				if (myObj.createNewFile()) {
 					System.out.println("File created: " + myObj.getName());
 					FileWriter fr = new FileWriter(myObj, true);
@@ -46,7 +47,7 @@ public class Utilities {
 			
 		} else if (Account.equals("Savings")){
 			try {
-				File myObj = new File("Accounts/" + username + "_" + numString + "_" + "saving.txt");
+				File myObj = new File("Utilities/" + username + "_" + numString + "_" + "saving.txt");
 				if (myObj.createNewFile()) {
 					System.out.println("File created: " + myObj.getName());
 					FileWriter fr = new FileWriter(myObj, true);
@@ -62,7 +63,7 @@ public class Utilities {
 		}
 			else if (Account.equals("Utility")){
 				try {
-					File myObj = new File("Accounts/" + username + "_" + numString + "_" + "utility.txt");
+					File myObj = new File("Utilities/" + username + "_" + numString + "_" + "utility.txt");
 					if (myObj.createNewFile()) {
 						System.out.println("File created: " + myObj.getName());
 						FileWriter fr = new FileWriter(myObj, true);
