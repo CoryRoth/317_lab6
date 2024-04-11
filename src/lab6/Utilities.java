@@ -8,6 +8,7 @@ import java.util.Random;
 public class Utilities {
 
 	private String SignedInAccountNum;
+	private String SignedInFileName;
 
 	public Utilities() {
 
@@ -26,8 +27,8 @@ public class Utilities {
 		return output;
 	}
 
-	private void createFileForAccount(String numString, Boolean checking, String username, String password) {
-		if (checking) {
+	private void createFileForAccount(String numString, String Account, String username, String password) {
+		if (Account.equals("Checking")) {
 			try {
 				File myObj = new File("Accounts/" + username + "_" + numString + "_" + "checking.txt");
 				if (myObj.createNewFile()) {
@@ -42,7 +43,8 @@ public class Utilities {
 				System.out.println("An error occurred.");
 				e.printStackTrace();
 			}
-		} else {
+			
+		} else if (Account.equals("Savings")){
 			try {
 				File myObj = new File("Accounts/" + username + "_" + numString + "_" + "saving.txt");
 				if (myObj.createNewFile()) {
@@ -58,10 +60,27 @@ public class Utilities {
 				e.printStackTrace();
 			}
 		}
+			else if (Account.equals("Utility")){
+				try {
+					File myObj = new File("Accounts/" + username + "_" + numString + "_" + "utility.txt");
+					if (myObj.createNewFile()) {
+						System.out.println("File created: " + myObj.getName());
+						FileWriter fr = new FileWriter(myObj, true);
+						fr.write("Password: " + password + "\n");
+						fr.close();
+					} else {
+						System.out.println("File already exists.");
+					}
+				} catch (IOException e) {
+					System.out.println("An error occurred.");
+					e.printStackTrace();
+				}
+		}
 
 	}
 
 	public String createAccount(String username, String password) {
+		
 		String[] usedAccountNum = getAllAccountNumbers();
 		if (usedAccountNum == null) {
 			return "NO";
@@ -86,8 +105,10 @@ public class Utilities {
 			if (!found) {
 				UniqueNum = false;
 			}
-			createFileForAccount(numString, true, username, password);
-			createFileForAccount(numString, false, username, password);
+			createFileForAccount(numString, "Checking", username, password);
+			createFileForAccount(numString, "Savings", username, password);
+			createFileForAccount(numString, "Utility", username, password);
+
 		}
 
 		return numString;
@@ -109,7 +130,7 @@ public class Utilities {
 
 	public int SignIn(int accountNumber, String password) {
 		
-		//##NEED TO CHECK account in files to find match
+		//NEED TO CHECK account in files to find match
 		//CHeck password for mach
 			// if so get account number
 			// set to private vairable
@@ -121,6 +142,8 @@ public class Utilities {
 	}
 
 	public String checkBillHistory(int accountNumber, int SignedIn) {
+		
+		//From File Find 
 		return null;
 	}
 
