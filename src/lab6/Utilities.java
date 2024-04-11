@@ -23,15 +23,17 @@ public class Utilities {
 		
 	}
 	
-	public void SignIn(String username, String password) {
+	public int SignIn(String username, String password) {
+		return 0;
 		
 	}
 	
-	public void SignIn(int accountNumber, String password) {
+	public int SignIn(int accountNumber, String password) {
+		return accountNumber;
 		
 	}
 	
-	public String checkBillHistory() {
+	public String checkBillHistory(int accountNumber,int SignedIn) {
 		return null;
 	}
 	
