@@ -1,5 +1,6 @@
 package lab6;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Interface {
@@ -11,6 +12,7 @@ public class Interface {
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		while (!exit) {
 			System.out.println("Enter 1 to SignIn, 2 to Create a new Account, -1 to exit");
+
 
 			//TODO ADD CHECK FOR STRING INPUT
 			//TODO CHECK FOR FLOAT
@@ -51,7 +53,7 @@ public class Interface {
 				//TODO EXCEPTION HANDLING
 				String Username = myObj.next();
 				String Password = myObj.next();	
-				int accountNumber = ultility.createAccount(Username, Password);
+				String accountNumber = ultility.createAccount(Username, Password);
 				System.out.println("Account Created \nUsername: " + Username + " Password: " + Password + " AccountNumber: " + accountNumber);
 				
 				
@@ -67,6 +69,7 @@ public class Interface {
 	
 			}
 		}
+		myObj.close();
 	}
 	
 	private static void SignInInterface() {
