@@ -32,6 +32,24 @@ public class User {
 	//Old user
 	public User(String username,String pathToFile) {
 	
+		try {
+			for (String line : Files.readAllLines(Paths.get("Users/" + username +".txt"), StandardCharsets.UTF_8)) {
+			    if (line.contains("Checking Balance")) {
+			    	//Get Balance
+			    	String value= line.split(" ")[2];
+			    	int balance=Integer.valueOf(value);
+			    	this.checkingAccount= new CheckingAccount(balance,username);
+			    }
+			    if (line.contains("Savings Balance")) {
+			    	//Get Balance 
+			    	int balance=0;
+			    	this.savingsAccount= new SavingsAccount();
+			    }
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	

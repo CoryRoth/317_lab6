@@ -1,2 +1,2 @@
-Checking Balance: 200
+Checking Balance: 400
 Savings Balance: 0
