@@ -42,7 +42,8 @@ public class User {
 			    }
 			    if (line.contains("Savings Balance")) {
 			    	//Get Balance 
-			    	int balance=0;
+			    	String value= line.split(" ")[2];
+			    	int balance=Integer.valueOf(value);
 			    	this.savingsAccount= new SavingsAccount();
 			    }
 			}

@@ -70,6 +70,7 @@ public class CheckingAccount {
 		//TODO CHECK FOR VALID INPUT
 		//TODO check for max deposit
 		this.balance -= value;
+		WriteBalance();
 		
 	}
 	
