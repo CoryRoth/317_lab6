@@ -1,15 +1,132 @@
 package lab6;
 
+import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
 
 public class Interface {
 
 	public static void main(String[] args) {
-		Utilities ultility = new Utilities();
 		Boolean exit = false;
-
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
+
+		
+		System.out.println("Bank\n Enter your name to login (Ex. Cory Roth would enter coryroth");
+		
+		String name = myObj.next();
+		
+		String pathToFile = null;
+		//TODO find if new user or old user
+		Boolean oldUser=isNewUser(name);
+		if(oldUser) {
+			User user=  new User(name,pathToFile);
+			//Welcome back
+			
+		}
+		else {
+			User user = new User(name);
+			//New User
+			//Make New checking account
+			
+			//Make new savings account
+		}
+		
+		while(!exit) {
+			//Login
+			
+			
+			System.out.println("What action would you like to do?\n 1 for Deposit, 2 for Withdraw, 3 for transfer, 4 to access Utilities Screen, -1 to Exit");
+
+			int choice = myObj.nextInt();
+			
+			if(choice ==1) {
+				//SHOW Deposit Interface
+				DepositInterface();
+			}
+			else if (choice ==2) {
+				//Show Withdraw Interface
+				WithrawInterface();
+			}
+			else if(choice ==3) {
+				//Show Transfer interface
+				TransferInterface();
+			}
+			else if(choice ==4) {
+				//Show Utilities interface
+				UtilitesInterface();
+			}
+			else if(choice==-1) {
+				//Exit
+				exit=true;
+				System.out.println("Exited");
+				break;
+			}
+
+			//Show interface to seelct possibile action
+				//Deposit, Withdraw, Transfer, Utilities
+		}
+		
+		
+		
+		
+		//TODO
+		//This code is for utilities
+		
+		myObj.close();
+	}
+	
+	
+	
+	private static Boolean isNewUser(String name) {
+		File folder = new File("Users/");
+		File[] listOfFiles = folder.listFiles();
+		if(listOfFiles != null) {
+			 for (int i = 0; i < listOfFiles.length; i++) {
+			  if (listOfFiles[i].isFile()) {
+				  if(listOfFiles[i].getName().split(".txt")[0].equals(name)) {
+					  return true;
+				  }
+			  } 
+			 }
+			}
+		return false;
+	}
+
+
+
+	private static void UtilitesInterface() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private static void TransferInterface() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private static void WithrawInterface() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private static void DepositInterface() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+
+	private static void UtilitiesIntface() {
+		Utilities ultility = new Utilities();
+		Scanner myObj = new Scanner(System.in); // Create a Scanner object
+
+		Boolean exit = false;
 		while (!exit) {
 			System.out.println("Enter 1 to SignIn, 2 to Create a new Account, -1 to exit");
 
@@ -32,7 +149,7 @@ public class Interface {
 					//TODO CHECK SIGN IN
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password + " AccountNumber: " + SignedIn);
 					exit = true;
-					SignInInterface();
+					//SignInInterface();
 		        }
 		        catch (NumberFormatException e) {
 		            System.out.println("String");
@@ -40,7 +157,7 @@ public class Interface {
 					//TODO CHECK SIGN IN
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password + " AccountNumber: " + SignedIn);
 					exit = true;
-					SignInInterface();
+					//SignInInterface();
 		        }
 					
 				
@@ -69,11 +186,6 @@ public class Interface {
 	
 			}
 		}
-		myObj.close();
-	}
-	
-	private static void SignInInterface() {
-		
 	}
 
 }
