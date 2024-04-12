@@ -15,28 +15,24 @@ public class SavingsAccount {
 	private int balance;
 	private String pathToFile;
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
-	}
-
+	// New Account
 	public SavingsAccount(String pathToFile) {
 		this.pathToFile = pathToFile;
 		this.balance = 0;
 	}
 
+	// Old Account
 	public SavingsAccount(int balance, String pathToFile) {
 		this.balance = balance;
 		this.pathToFile = pathToFile;
 	}
 
 	public void deposit(int value) {
-
 		// TODO CHECK FOR VALID INPUT
 		// TODO check for max deposit
 		this.balance += value;
 
-		// WRite to file
+		// Write to file
 		WriteBalance();
 
 	}
@@ -47,7 +43,7 @@ public class SavingsAccount {
 
 	public void transfer(int amount) {
 		// TODO CHECK FOR VALID INPUT
-		// DO NOT UPDATE MAX BALANCE
+		// TODO DO NOT UPDATE MAX BALANCE
 		this.balance += amount;
 		WriteBalance();
 
@@ -57,20 +53,18 @@ public class SavingsAccount {
 		List<String> newLines = new ArrayList<>();
 		try {
 			for (String line : Files.readAllLines(Paths.get("Users/" + pathToFile + ".txt"), StandardCharsets.UTF_8)) {
-				if (line.contains("Checking Balance")) {
-					newLines.add("Checking Balance: " + balance);
+				if (line.contains("Savings Balance")) {
+					newLines.add("Savings Balance: " + balance);
 				} else {
 					newLines.add(line);
 				}
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		try {
 			Files.write(Paths.get("Users/" + pathToFile + ".txt"), newLines, StandardCharsets.UTF_8);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

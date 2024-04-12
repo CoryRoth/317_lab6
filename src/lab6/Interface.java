@@ -1,6 +1,5 @@
 package lab6;
 
-import java.io.File;
 import java.util.Scanner;
 
 public class Interface {
@@ -14,7 +13,7 @@ public class Interface {
 		String name = myObj.next();
 
 		String pathToFile = null;
-		Boolean oldUser = isNewUser(name);
+		Boolean oldUser = User.isNewUser(name);
 		User user = null;
 		if (oldUser) {
 			user = new User(name, pathToFile);
@@ -62,20 +61,7 @@ public class Interface {
 		myObj.close();
 	}
 
-	private static Boolean isNewUser(String name) {
-		File folder = new File("Users/");
-		File[] listOfFiles = folder.listFiles();
-		if (listOfFiles != null) {
-			for (int i = 0; i < listOfFiles.length; i++) {
-				if (listOfFiles[i].isFile()) {
-					if (listOfFiles[i].getName().split(".txt")[0].equals(name)) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
-	}
+	
 
 	private static void BalanceInterface(User user) {
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
@@ -247,6 +233,7 @@ public class Interface {
 				// TODO
 			} else if (choice == -1) {
 				myObj.close();
+				System.out.println("Signed Out");
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");

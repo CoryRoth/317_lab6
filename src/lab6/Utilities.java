@@ -3,6 +3,11 @@ package lab6;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Utilities {
@@ -14,19 +19,34 @@ public class Utilities {
 
 	}
 
-	private String[] getAllAccountUsernames() {
-		// TODO
-		String[] output = { "test", "test" };
-		return output;
+	private List<String> getAllAccountUsernames() {
+		File folder = new File("Utilities/");
+		File[] listOfFiles = folder.listFiles();
+		List<String> AccountNumbersList = new ArrayList<>();
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					AccountNumbersList.add(listOfFiles[i].getName().split("_")[0]);
+				}
+			}
+		}
+		return AccountNumbersList;
 	}
 
-	private String[] getAllAccountNumbers() {
-		// TODO
-		String[] output = { "test", "test" };
-		return output;
+	private List<String> getAllAccountNumbers() {
+		File folder = new File("Utilities/");
+		File[] listOfFiles = folder.listFiles();
+		List<String> AccountNumbersList = new ArrayList<>();
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					AccountNumbersList.add(listOfFiles[i].getName().split("_")[1]);
+				}
+			}
+		}
+		return AccountNumbersList;
 	}
 
-	// TODO FIX
 	private void createFileForAccount(String numString, String username, String password) {
 		try {
 			File myObj = new File("Utilities/" + username + "_" + numString + "_" + ".txt");
@@ -50,11 +70,11 @@ public class Utilities {
 
 	public String createAccount(String username, String password) {
 
-		String[] usedAccountNum = getAllAccountNumbers();
+		List<String> usedAccountNum = getAllAccountNumbers();
 		if (usedAccountNum == null) {
 			return "NO";
 		}
-		if (usedAccountNum.length > 999999) {
+		if (usedAccountNum.size() > 999999) {
 			return "NO";
 		}
 		Boolean UniqueNum = true;
@@ -83,7 +103,7 @@ public class Utilities {
 	}
 
 	public int SignIn(String username, String password) {
-
+		// TODO
 		// ##NEED TO CHECK username in files to find match
 		// CHeck password for mach
 		// if so get account number
@@ -96,7 +116,7 @@ public class Utilities {
 	}
 
 	public int SignIn(int accountNumber, String password) {
-
+		// TODO
 		// NEED TO CHECK account in files to find match
 		// CHeck password for mach
 		// if so get account number
@@ -109,15 +129,33 @@ public class Utilities {
 	}
 
 	public String checkBillHistory(int accountNumber, int SignedIn) {
-
+		// TODO
 		// From File Find
 		return null;
 	}
 
-	public String checkBillPayment() {
-		return null;
+	public String checkCurrentBill() {
+		String CurrentBill = null;
+		try {
+			for (String line : Files.readAllLines(Paths.get(SignedInFileName), StandardCharsets.UTF_8)) {
+				if (line.contains("Next Bill")) {
+					CurrentBill = line;
+				} else if (line.contains("Due Date")) {
+					CurrentBill = CurrentBill + " " + line;
+				} else {
+				}
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return CurrentBill;
 	}
 
-	// TODO WRITE TO File
+	public String payBill(int accountNumber, User user) {
+		// TODO
 
+		// TODO WRITE BILL TO BILL HISTORY
+		return null;
+	}
 }
