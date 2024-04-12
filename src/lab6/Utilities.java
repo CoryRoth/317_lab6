@@ -105,6 +105,7 @@ public class Utilities {
 	public int SignIn(String username, String password) {
 		// TODO
 		// ##NEED TO CHECK username in files to find match
+		List<String> usedUserNames = getAllAccountUsernames();
 		// CHeck password for mach
 		// if so get account number
 		// set to private vairable
@@ -127,6 +128,10 @@ public class Utilities {
 		return accountNumber;
 
 	}
+	public void SignOut() {
+		SignedInFileName = null;
+		SignedInAccountNum = null;
+	}
 
 	public String checkBillHistory() {
 		String CurrentBill = null;
@@ -135,7 +140,6 @@ public class Utilities {
 				if (line.contains("Bill History")) {
 					CurrentBill = line;
 				} else if (line.contains("Payed")) {
-					// TODO See if I change that
 					CurrentBill = CurrentBill + " " + line;
 				} else {
 				}
