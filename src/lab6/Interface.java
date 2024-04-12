@@ -1,7 +1,6 @@
 package lab6;
 
 import java.io.File;
-import java.util.Random;
 import java.util.Scanner;
 
 public class Interface {
@@ -11,11 +10,10 @@ public class Interface {
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 
 		System.out.println("Bank\n Enter your name to login (Ex. Cory Roth would enter coryroth");
-
+		// TODO VALIDATE INPUT
 		String name = myObj.next();
 
 		String pathToFile = null;
-		// TODO find if new user or old user
 		Boolean oldUser = isNewUser(name);
 		User user = null;
 		if (oldUser) {
@@ -29,11 +27,12 @@ public class Interface {
 		while (!exit) {
 			// Login
 
+			// Show interface to seelct possibile action
+			// Deposit, Withdraw, Transfer, Utilities
 			System.out.println(
 					"What action would you like to do?\n 0 to Check Balance, 1 for Deposit, 2 for Withdraw, 3 for transfer, 4 to access Utilities Screen, -1 to Exit");
 
 			int choice = myObj.nextInt();
-
 			if (choice == 0) {
 				// SHOW Deposit Interface
 				BalanceInterface(user);
@@ -59,13 +58,7 @@ public class Interface {
 				System.out.println("You entered an incorrect Value.");
 			}
 
-			// Show interface to seelct possibile action
-			// Deposit, Withdraw, Transfer, Utilities
 		}
-
-		// TODO
-		// This code is for utilities
-
 		myObj.close();
 	}
 
@@ -85,16 +78,16 @@ public class Interface {
 	}
 
 	private static void BalanceInterface(User user) {
-		// TODO Auto-generated method stub
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		Boolean exit = false;
 		while (!exit) {
 			System.out.println("Balance\n Enter 1 for Checking, 2 for Savings, -1 to return");
+			// TODO IPUT VALIDATION
 			int choice = myObj.nextInt();
 			if (choice == 1) {
 				System.out.println("Deposit Balance: " + user.checkingAccount.getBalance());
 			} else if (choice == 2) {
-				// TODO
+				System.out.println("Savings Balance: " + user.savingsAccount.getBalance());
 			} else if (choice == -1) {
 				myObj.close();
 				break;
@@ -102,22 +95,25 @@ public class Interface {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
+		myObj.close();
 	}
 
 	private static void TransferInterface(User user) {
-		// TODO Auto-generated method stub
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		Boolean exit = false;
 		while (!exit) {
 			System.out.println(
 					"Transfer\n Enter Which Transfer you would like to do 1 for Checking to Savings, 2 for Savings to Checking, -1 to return");
+			// TODO INPUT Validation
 			int choice = myObj.nextInt();
 			if (choice == 1) {
 				System.out.println("Enter How much you would like to Transfer?");
+				// TODO INPUT Validation
 				int amount = myObj.nextInt();
 				user.transfer(amount, true);
 			} else if (choice == 2) {
 				System.out.println("Enter How much you would like to Transfer?");
+				// TODO INPUT Validation
 				int amount = myObj.nextInt();
 				user.transfer(amount, false);
 			} else if (choice == -1) {
@@ -130,41 +126,47 @@ public class Interface {
 	}
 
 	private static void WithrawInterface(User user) {
-		// TODO Auto-generated method stub
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		Boolean exit = false;
 		while (!exit) {
-			System.out.println("Withdraw\n Enter 1 for Checking,  -1 to return");
+			System.out.println("Withdraw\n Enter 1 for Checking, -1 to return");
+			// TODO INPUT Validation
 			int choice = myObj.nextInt();
 			if (choice == 1) {
 				System.out.println("Enter How much you would like to Withdraw");
+				// TODO INPUT Validation
 				int amount = myObj.nextInt();
 				user.checkingAccount.withdraw(amount);
-			} else if (choice == 2) {
-				// TODO
 			} else if (choice == -1) {
+				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
+		myObj.close();
 	}
 
 	private static void DepositInterface(User user) {
-		// TODO Auto-generated method stub
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 
 		Boolean exit = false;
 		while (!exit) {
 			System.out.println("Deposit\n Enter 1 for Checking, 2 for Savings, -1 to return");
+			// TODO INPUT Validation
 			int choice = myObj.nextInt();
 			if (choice == 1) {
-				System.out.println("Enter How much you would like to deposit");
+				System.out.println("CHECKING\nEnter How much you would like to deposit");
+				// TODO INPUT Validation
 				int amount = myObj.nextInt();
 				user.checkingAccount.deposit(amount);
 			} else if (choice == 2) {
-				// TODO
+				System.out.println("SAVINGS\nEnter How much you would like to deposit");
+				// TODO INPUT Validation
+				int amount = myObj.nextInt();
+				user.savingsAccount.deposit(amount);
 			} else if (choice == -1) {
+				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
@@ -180,29 +182,27 @@ public class Interface {
 		while (!exit) {
 			System.out.println("Enter 1 to SignIn, 2 to Create a new Account, -1 to exit");
 
-			// TODO ADD CHECK FOR STRING INPUT
-			// TODO CHECK FOR FLOAT
-			// TODO CHECK FOR NULL
+			// TODO INPUT Validation
 			Integer temp = myObj.nextInt(); // Read user input
 			if (temp == 1) {
-				// TODO SIGNIN
+				// Sign in
 				System.out.println("Sign in With your username/account number and password, separated by a space");
+				// TODO INPUT Validatio?
 				String Username = myObj.next();
 				String Password = myObj.next();
 				int SignedIn;
 				try {
+					// If accountNumber is entered
 					int accountnumber = Integer.valueOf(Username);
-					System.out.println("Integer");
-					SignedIn = ultility.SignIn(accountnumber, Password);
 					// TODO CHECK SIGN IN
+					SignedIn = ultility.SignIn(accountnumber, Password);
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
 							+ " AccountNumber: " + SignedIn);
 					exit = true;
 					SignInInterface(user);
 				} catch (NumberFormatException e) {
-					System.out.println("String");
-					SignedIn = ultility.SignIn(Username, Password);
 					// TODO CHECK SIGN IN
+					SignedIn = ultility.SignIn(Username, Password);
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
 							+ " AccountNumber: " + SignedIn);
 					exit = true;
@@ -210,27 +210,25 @@ public class Interface {
 				}
 
 			} else if (temp == 2) {
-				// TODO CREATE ACCOUNT
+				// Create Account
 				System.out.println("Enter A username and a password, separated by a space");
-
 				// TODO EXCEPTION HANDLING
 				String Username = myObj.next();
 				String Password = myObj.next();
-				// TODO FIX FUNCTION
 				String accountNumber = ultility.createAccount(Username, Password);
 				System.out.println("Account Created \nUsername: " + Username + " Password: " + Password
 						+ " AccountNumber: " + accountNumber);
 
-			}
-
-			else if (temp == -1) {
+			} else if (temp == -1) {
 				exit = false;
 				System.out.println("Exited");
+				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
+		myObj.close();
 	}
 
 	private static void SignInInterface(User user) {
@@ -248,11 +246,13 @@ public class Interface {
 			} else if (choice == 3) {
 				// TODO
 			} else if (choice == -1) {
+				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
+		myObj.close();
 	}
 
 }
