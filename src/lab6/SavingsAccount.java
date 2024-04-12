@@ -31,4 +31,9 @@ public class SavingsAccount {
 		return this.balance;
 	}
 
+	public void transfer(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

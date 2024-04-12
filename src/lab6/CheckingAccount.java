@@ -74,6 +74,15 @@ public class CheckingAccount {
 		
 	}
 	
+	public void transfer (int value) {
+		
+		//TODO CHECK FOR VALID INPUT
+		//DO NOT UPDATE MAX BALANCE
+		this.balance += value;
+		WriteBalance();
+		
+	}
+	
 	public int getBalance() {
 		return this.balance;
 	}

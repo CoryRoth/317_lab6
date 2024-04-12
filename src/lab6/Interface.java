@@ -24,10 +24,6 @@ public class Interface {
 
 		} else {
 			user = new User(name);
-			// New User
-			// Make New checking account
-
-			// Make new savings account
 		}
 
 		while (!exit) {
@@ -50,7 +46,7 @@ public class Interface {
 				WithrawInterface(user);
 			} else if (choice == 3) {
 				// Show Transfer interface
-				TransferInterface();
+				TransferInterface(user);
 			} else if (choice == 4) {
 				// Show Utilities interface
 				UtilitesInterface();
@@ -98,6 +94,7 @@ public class Interface {
 			} else if (choice == 2) {
 				// TODO
 			} else if (choice == -1) {
+				myObj.close();
 				break;
 			}
 		}
@@ -108,9 +105,26 @@ public class Interface {
 
 	}
 
-	private static void TransferInterface() {
+	private static void TransferInterface(User user) {
 		// TODO Auto-generated method stub
-
+		Scanner myObj = new Scanner(System.in); // Create a Scanner object
+		Boolean exit = false;
+		while (!exit) {
+			System.out.println("Transfer\n Enter Which Transfer you would like to do 1 for Checking to Savings, 2 for Savings to Checking, -1 to return");
+			int choice = myObj.nextInt();
+			if (choice == 1) {
+				System.out.println("Enter How much you would like to Transfer?");
+				int amount = myObj.nextInt();
+				user.transfer(amount,true);
+			} else if (choice == 2) {
+				System.out.println("Enter How much you would like to Transfer?");
+				int amount = myObj.nextInt();
+				user.transfer(amount,false);
+			} else if (choice == -1) {
+				break;
+			}
+		}
+		myObj.close();
 	}
 
 	private static void WithrawInterface(User user) {
