@@ -13,8 +13,7 @@ public class Utilities {
 	public Utilities() {
 
 	}
-	
-	
+
 	private String[] getAllAccountUsernames() {
 		// TODO
 		String[] output = { "test", "test" };
@@ -27,61 +26,30 @@ public class Utilities {
 		return output;
 	}
 
-	//TODO FIX
-	private void createFileForAccount(String numString, String Account, String username, String password) {
-		if (Account.equals("Checking")) {
-			try {
-				File myObj = new File("Utilities/" + username + "_" + numString + "_" + "checking.txt");
-				if (myObj.createNewFile()) {
-					System.out.println("File created: " + myObj.getName());
-					FileWriter fr = new FileWriter(myObj, true);
-					fr.write("Password: " + password + "\n");
-					fr.close();
-				} else {
-					System.out.println("File already exists.");
-				}
-			} catch (IOException e) {
-				System.out.println("An error occurred.");
-				e.printStackTrace();
+	// TODO FIX
+	private void createFileForAccount(String numString, String username, String password) {
+		try {
+			File myObj = new File("Utilities/" + username + "_" + numString + "_" + ".txt");
+			if (myObj.createNewFile()) {
+				System.out.println("File created: " + myObj.getName());
+				FileWriter fr = new FileWriter(myObj, true);
+				fr.write("Password: " + password + "\n");
+				fr.write("Bill History: " + "\n");
+				fr.write("Next Bill: " + "\n");
+				fr.write("Due Date: " + "\n");
+				fr.close();
+			} else {
+				System.out.println("File already exists.");
 			}
-			
-		} else if (Account.equals("Savings")){
-			try {
-				File myObj = new File("Utilities/" + username + "_" + numString + "_" + "saving.txt");
-				if (myObj.createNewFile()) {
-					System.out.println("File created: " + myObj.getName());
-					FileWriter fr = new FileWriter(myObj, true);
-					fr.write("Password: " + password + "\n");
-					fr.close();
-				} else {
-					System.out.println("File already exists.");
-				}
-			} catch (IOException e) {
-				System.out.println("An error occurred.");
-				e.printStackTrace();
-			}
-		}
-			else if (Account.equals("Utility")){
-				try {
-					File myObj = new File("Utilities/" + username + "_" + numString + "_" + "utility.txt");
-					if (myObj.createNewFile()) {
-						System.out.println("File created: " + myObj.getName());
-						FileWriter fr = new FileWriter(myObj, true);
-						fr.write("Password: " + password + "\n");
-						fr.close();
-					} else {
-						System.out.println("File already exists.");
-					}
-				} catch (IOException e) {
-					System.out.println("An error occurred.");
-					e.printStackTrace();
-				}
+		} catch (IOException e) {
+			System.out.println("An error occurred.");
+			e.printStackTrace();
 		}
 
 	}
 
 	public String createAccount(String username, String password) {
-		
+
 		String[] usedAccountNum = getAllAccountNumbers();
 		if (usedAccountNum == null) {
 			return "NO";
@@ -106,9 +74,7 @@ public class Utilities {
 			if (!found) {
 				UniqueNum = false;
 			}
-			createFileForAccount(numString, "Checking", username, password);
-			createFileForAccount(numString, "Savings", username, password);
-			createFileForAccount(numString, "Utility", username, password);
+			createFileForAccount(numString, username, password);
 
 		}
 
@@ -118,33 +84,33 @@ public class Utilities {
 
 	public int SignIn(String username, String password) {
 
-		//##NEED TO CHECK username in files to find match
-			//CHeck password for mach
-				// if so get account number
-				// set to private vairable
-				// return good
-		
-		//Else return bad
+		// ##NEED TO CHECK username in files to find match
+		// CHeck password for mach
+		// if so get account number
+		// set to private vairable
+		// return good
+
+		// Else return bad
 		return 0;
 
 	}
 
 	public int SignIn(int accountNumber, String password) {
-		
-		//NEED TO CHECK account in files to find match
-		//CHeck password for mach
-			// if so get account number
-			// set to private vairable
-			// return good
-	
-		//Else return bad
+
+		// NEED TO CHECK account in files to find match
+		// CHeck password for mach
+		// if so get account number
+		// set to private vairable
+		// return good
+
+		// Else return bad
 		return accountNumber;
 
 	}
 
 	public String checkBillHistory(int accountNumber, int SignedIn) {
-		
-		//From File Find 
+
+		// From File Find
 		return null;
 	}
 

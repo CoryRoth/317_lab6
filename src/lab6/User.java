@@ -24,7 +24,7 @@ public class User {
 	public User(String username) {
 		this.pathToFile = username;
 		this.checkingAccount = new CheckingAccount(username);
-		this.savingsAccount = new SavingsAccount();
+		this.savingsAccount = new SavingsAccount(username);
 		createUserFiles(pathToFile);
 	}
 	
@@ -44,7 +44,7 @@ public class User {
 			    	//Get Balance 
 			    	String value= line.split(" ")[2];
 			    	int balance=Integer.valueOf(value);
-			    	this.savingsAccount= new SavingsAccount();
+			    	this.savingsAccount= new SavingsAccount(balance,username);
 			    }
 			}
 		} catch (IOException e) {

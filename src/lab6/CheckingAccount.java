@@ -46,8 +46,8 @@ public class CheckingAccount {
 		List<String> newLines = new ArrayList<>();
 		try {
 			for (String line : Files.readAllLines(Paths.get("Users/" + pathToFile +".txt"), StandardCharsets.UTF_8)) {
-			    if (line.contains("Checking Balance")) {
-			       newLines.add("Checking Balance: "+ balance);
+			    if (line.contains("Savings Balance")) {
+			       newLines.add("Savings Balance: "+ balance);
 			    } else {
 			       newLines.add(line);
 			    }
