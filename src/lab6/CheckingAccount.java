@@ -71,6 +71,13 @@ public class CheckingAccount {
 		WriteBalance();
 
 	}
+	public void payBill(int value) {
+		// TODO CHECK FOR VALID INPUT
+		// TODO DO NOT UPDATE MAX Withdraw
+		this.balance -= value;
+		WriteBalance();
+
+	}
 
 	public int getBalance() {
 		return this.balance;

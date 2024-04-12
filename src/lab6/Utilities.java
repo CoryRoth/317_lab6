@@ -54,9 +54,9 @@ public class Utilities {
 				System.out.println("File created: " + myObj.getName());
 				FileWriter fr = new FileWriter(myObj, true);
 				fr.write("Password: " + password + "\n");
-				fr.write("Bill History: " + "\n");
 				fr.write("Next Bill: " + "\n");
 				fr.write("Due Date: " + "\n");
+				fr.write("Bill History: " + "\n");
 				fr.close();
 			} else {
 				System.out.println("File already exists.");
@@ -128,10 +128,23 @@ public class Utilities {
 
 	}
 
-	public String checkBillHistory(int accountNumber, int SignedIn) {
-		// TODO
-		// From File Find
-		return null;
+	public String checkBillHistory() {
+		String CurrentBill = null;
+		try {
+			for (String line : Files.readAllLines(Paths.get(SignedInFileName), StandardCharsets.UTF_8)) {
+				if (line.contains("Bill History")) {
+					CurrentBill = line;
+				} else if (line.contains("Payed")) {
+					// TODO See if I change that
+					CurrentBill = CurrentBill + " " + line;
+				} else {
+				}
+
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return CurrentBill;
 	}
 
 	public String checkCurrentBill() {
@@ -153,9 +166,47 @@ public class Utilities {
 	}
 
 	public String payBill(int accountNumber, User user) {
-		// TODO
+		// Get Current Bill Balance
+		int CurrentBill = 0;
+		try {
+			for (String line : Files.readAllLines(Paths.get(SignedInFileName), StandardCharsets.UTF_8)) {
+				if (line.contains("Next Bill")) {
+					CurrentBill = Integer.valueOf(line.split(" ")[1]);
+				} else {
+					return "There is no Outstanding Bill for you to pay";
+				}
 
-		// TODO WRITE BILL TO BILL HISTORY
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		// TODO Check if Balance is able to pay
+		user.checkingAccount.payBill(CurrentBill);
+		List<String> newLines = new ArrayList<>();
+		String CurrentBillOutput = null;
+		try {
+			for (String line : Files.readAllLines(Paths.get(SignedInFileName), StandardCharsets.UTF_8)) {
+				if (line.contains("Next Bill")) {
+					newLines.add("Next Bill: ");
+					CurrentBillOutput = line;
+				} else if (line.contains("Due Date")) {
+					newLines.add("Due Date: ");
+					CurrentBillOutput = CurrentBillOutput + line;
+				} else if (line.contains("Bill History")) {
+					newLines.add(line);
+					newLines.add("Payed " + CurrentBillOutput);
+				} else {
+					newLines.add(line);
+				}
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		try {
+			Files.write(Paths.get("SignedInFileName"), newLines, StandardCharsets.UTF_8);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		return null;
 	}
 }
