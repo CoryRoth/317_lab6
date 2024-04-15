@@ -129,6 +129,7 @@ public class Utilities {
 	}
 
 	private String getAccountNumber(String username) {
+		//TODO THIS SHOULD WORK???
 		File folder = new File("Utilities/");
 		File[] listOfFiles = folder.listFiles();
 		if (listOfFiles != null) {
