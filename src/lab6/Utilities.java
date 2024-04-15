@@ -106,6 +106,14 @@ public class Utilities {
 		// TODO
 		// ##NEED TO CHECK username in files to find match
 		List<String> usedUserNames = getAllAccountUsernames();
+		List<String> userNameAndPasswords = getAllPasswordsFromUsernames(usedUserNames);
+		
+		String Username_Password = username + " " + password;
+		if(userNameAndPasswords.contains(Username_Password)){
+			//good sign in
+			//TODO set SignedInFileName 
+			return 1;
+		}
 		// CHeck password for mach
 		// if so get account number
 		// set to private vairable
@@ -114,6 +122,14 @@ public class Utilities {
 		// Else return bad
 		return 0;
 
+	}
+
+	private List<String> getAllPasswordsFromUsernames(List<String> usedUserNames) {
+		// TODO Auto-generated method stub
+		
+		//GET PASSWORDS FROM FILES
+		//STRING SHOULD BE "USERNAME PASSWORD"
+		return null;
 	}
 
 	public int SignIn(int accountNumber, String password) {
