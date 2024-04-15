@@ -125,12 +125,19 @@ public class Utilities {
 	}
 
 	private String MakeFileName(String username, String accountNumber) {
-		// TODO Auto-generated method stub
-		return null;
+		return "Utilities/" + username + "_" + accountNumber + "_" + ".txt";
 	}
 
 	private String getAccountNumber(String username) {
-		// TODO Auto-generated method stub
+		File folder = new File("Utilities/");
+		File[] listOfFiles = folder.listFiles();
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(username)) {
+					return listOfFiles[i].getName().split("_")[1];
+				}
+			}
+		}
 		return null;
 	}
 
