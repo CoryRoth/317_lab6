@@ -129,7 +129,7 @@ public class Utilities {
 	}
 
 	private String getAccountNumber(String username) {
-		//TODO THIS SHOULD WORK???
+		// TODO THIS SHOULD WORK???
 		File folder = new File("Utilities/");
 		File[] listOfFiles = folder.listFiles();
 		if (listOfFiles != null) {
@@ -147,6 +147,33 @@ public class Utilities {
 
 		// GET PASSWORDS FROM FILES
 		// STRING SHOULD BE "USERNAME PASSWORD"
+		File folder = new File("Utilities/");
+		File[] listOfFiles = folder.listFiles();
+		List<String> AccountNumbersList = new ArrayList<>();
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile()) {
+					for (String username : usedUserNames) {
+						if (listOfFiles[i].getName().contains(username)) {
+							String password = null;
+							try {
+								for (String line : Files.readAllLines(Paths.get(SignedInFileName),
+										StandardCharsets.UTF_8)) {
+									if (line.contains("Password")) {
+										password = line.split(" ")[1];
+									}
+								}
+							} catch (IOException e) {
+								// TODO Auto-generated catch block
+								e.printStackTrace();
+							}
+							AccountNumbersList.add(username + " " + password);
+						}
+					}
+					// return listOfFiles[i].getName().split("_")[1];
+				}
+			}
+		}
 		return null;
 	}
 
@@ -156,8 +183,8 @@ public class Utilities {
 		List<String> usedUserNames = getAllAccountUsernames();
 		List<String> userNameAndPasswords = getAllPasswordsFromUsernames(usedUserNames);
 
-		String userName = getUserName(accountNumber);
 		String accountNum = String.format("%06d", accountNumber);
+		String userName = getUserName(accountNum);
 
 		String Username_Password = userName + " " + password;
 		if (userNameAndPasswords.contains(Username_Password)) {
@@ -171,8 +198,17 @@ public class Utilities {
 
 	}
 
-	private String getUserName(int accountNumber) {
-		// TODO Auto-generated method stub
+	private String getUserName(String accountNumber) {
+		// TODO THIS SHOULD WORK???
+		File folder = new File("Utilities/");
+		File[] listOfFiles = folder.listFiles();
+		if (listOfFiles != null) {
+			for (int i = 0; i < listOfFiles.length; i++) {
+				if (listOfFiles[i].isFile() && listOfFiles[i].getName().contains(accountNumber)) {
+					return listOfFiles[i].getName().split("_")[0];
+				}
+			}
+		}
 		return null;
 	}
 
