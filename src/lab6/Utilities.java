@@ -107,43 +107,67 @@ public class Utilities {
 		// ##NEED TO CHECK username in files to find match
 		List<String> usedUserNames = getAllAccountUsernames();
 		List<String> userNameAndPasswords = getAllPasswordsFromUsernames(usedUserNames);
-		
+
+		String accountNumber = getAccountNumber(username);
+
 		String Username_Password = username + " " + password;
-		if(userNameAndPasswords.contains(Username_Password)){
-			//good sign in
-			//TODO set SignedInFileName 
+		if (userNameAndPasswords.contains(Username_Password)) {
+			// good sign in
+			// TODO set SignedInFileName
+			SignedInFileName = MakeFileName(username, accountNumber);
+			SignedInAccountNum = accountNumber;
 			return 1;
 		}
-		// CHeck password for mach
-		// if so get account number
-		// set to private vairable
-		// return good
 
 		// Else return bad
 		return 0;
 
 	}
 
+	private String MakeFileName(String username, String accountNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private String getAccountNumber(String username) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	private List<String> getAllPasswordsFromUsernames(List<String> usedUserNames) {
 		// TODO Auto-generated method stub
-		
-		//GET PASSWORDS FROM FILES
-		//STRING SHOULD BE "USERNAME PASSWORD"
+
+		// GET PASSWORDS FROM FILES
+		// STRING SHOULD BE "USERNAME PASSWORD"
 		return null;
 	}
 
 	public int SignIn(int accountNumber, String password) {
-		// TODO
-		// NEED TO CHECK account in files to find match
-		// CHeck password for mach
-		// if so get account number
-		// set to private vairable
-		// return good
+
+		// TODO WHAT AM I DOING
+		List<String> usedUserNames = getAllAccountUsernames();
+		List<String> userNameAndPasswords = getAllPasswordsFromUsernames(usedUserNames);
+
+		String userName = getUserName(accountNumber);
+		String accountNum = String.format("%06d", accountNumber);
+
+		String Username_Password = userName + " " + password;
+		if (userNameAndPasswords.contains(Username_Password)) {
+			SignedInFileName = MakeFileName(userName, accountNum);
+			SignedInAccountNum = accountNum;
+			return 1;
+		}
 
 		// Else return bad
-		return accountNumber;
+		return 0;
 
 	}
+
+	private String getUserName(int accountNumber) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 	public void SignOut() {
 		SignedInFileName = null;
 		SignedInAccountNum = null;
