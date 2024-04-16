@@ -136,16 +136,18 @@ public class SavingsAccount {
 		return this.balance;
 	}
 
-	public void transfer(int amount) {
-		// TODO CHECK FOR VALID INPUT
-		// TODO DO NOT UPDATE MAX BALANCE
+	public int transfer(int amount) {
+
 		if (TransferForDay + amount <= MaxTransferPerDay) {
 
+			if (balance + amount < 0) {
+				return -1;
+			}
 			this.balance += amount;
 			WriteBalance(amount, true);
-		}
-		{
-
+			return 0;
+		} else {
+			return -2;
 		}
 
 	}

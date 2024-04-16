@@ -63,8 +63,6 @@ public class CheckingAccount {
 	}
 
 	public void deposit(int value) {
-		// TODO CHECK FOR VALID INPUT
-		// TODO check for max deposit
 		if (BalanceForDay + value <= MaxDepositPerDay) {
 			this.balance += value;
 
@@ -168,19 +166,24 @@ public class CheckingAccount {
 
 	}
 
-	public void transfer(int value) {
-		// TODO CHECK FOR VALID INPUT
-		// TODO DO NOT UPDATE MAX BALANCE
+	public int transfer(int value) {
+
+		if (balance - value < 0) {
+			return -1;
+		}
 		this.balance += value;
 		WriteBalance();
-
+		return 0;
 	}
 
-	public void payBill(int value) {
-		// TODO CHECK FOR VALID INPUT
-		// TODO DO NOT UPDATE MAX Withdraw
+	public int payBill(int value) {
+
+		if (balance - value < 0) {
+			return -1;
+		}
 		this.balance -= value;
 		WriteBalance();
+		return 0;
 
 	}
 

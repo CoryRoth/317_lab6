@@ -63,6 +63,7 @@ public class User {
 		}
 		return false;
 	}
+
 	private void createUserFiles(String filename) {
 		try {
 			File myObj = new File("Users/" + filename + ".txt");
@@ -82,6 +83,7 @@ public class User {
 	}
 
 	public void transfer(int amount, Boolean CheckingsToSavings) {
+		
 		if (CheckingsToSavings) {
 			this.checkingAccount.transfer(-amount);
 			this.savingsAccount.transfer(amount);
