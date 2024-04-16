@@ -35,8 +35,7 @@ public class Interface {
 			if (choice == 0) {
 				// SHOW Deposit Interface
 				BalanceInterface(user);
-			}
-			else if (choice == 1) {
+			} else if (choice == 1) {
 				// SHOW Deposit Interface
 				DepositInterface(user);
 			} else if (choice == 2) {
@@ -61,9 +60,8 @@ public class Interface {
 		myObj.close();
 	}
 
-	
-
 	private static void BalanceInterface(User user) {
+		@SuppressWarnings("resource")
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		Boolean exit = false;
 		while (!exit) {
@@ -83,6 +81,7 @@ public class Interface {
 	}
 
 	private static void TransferInterface(User user) {
+		@SuppressWarnings("resource")
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		Boolean exit = false;
 		while (!exit) {
@@ -109,6 +108,7 @@ public class Interface {
 	}
 
 	private static void WithrawInterface(User user) {
+		@SuppressWarnings("resource")
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 		Boolean exit = false;
 		while (!exit) {
@@ -129,6 +129,7 @@ public class Interface {
 	}
 
 	private static void DepositInterface(User user) {
+		@SuppressWarnings("resource")
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 
 		Boolean exit = false;
@@ -156,18 +157,19 @@ public class Interface {
 
 	private static void UtilitesInterface(User user) {
 		Utilities ultility = new Utilities();
-		 // Create a Scanner object
+		// Create a Scanner object
 
 		Boolean exit = false;
 		while (!exit) {
 			System.out.println("Enter 1 to SignIn, 2 to Create a new Account, -1 to exit");
+			@SuppressWarnings("resource")
 			Scanner myObj = new Scanner(System.in);
 			// TODO INPUT Validation
 			Integer temp = myObj.nextInt(); // Read user input
 			if (temp == 1) {
 				// Sign in
 				System.out.println("Sign in With your username/account number and password, separated by a space");
-				// TODO INPUT Validatio?
+				// TODO INPUT Validation?
 				String Username = myObj.next();
 				String Password = myObj.next();
 				int SignedIn;
@@ -176,17 +178,25 @@ public class Interface {
 					int accountnumber = Integer.valueOf(Username);
 					// TODO CHECK SIGN IN
 					SignedIn = ultility.SignIn(accountnumber, Password);
-					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
-							+ " AccountNumber: " + SignedIn);
-					exit = false;
-					SignInInterface(user,ultility);
+					if (SignedIn == 1) {
+						System.out.println(
+								"Signed in \nUsername: " + Username + " Password: " + Password + " AccountNumber: ");
+						exit = false;
+						SignInInterface(user, ultility);
+					} else {
+						System.out.println("Information Incorrect");
+					}
 				} catch (NumberFormatException e) {
-					System.out.println("Username: " + Username + "\n" + "Password: " + Password);
 					SignedIn = ultility.SignIn(Username, Password);
-					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
-							+ " AccountNumber: " + SignedIn);
-					exit = false;
-					SignInInterface(user,ultility);
+					if (SignedIn == 1) {
+						System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
+								+ " AccountNumber: " + SignedIn);
+						exit = false;
+						SignInInterface(user, ultility);
+					} else {
+						System.out.println("Information Incorrect");
+					}
+
 				}
 
 			} else if (temp == 2) {
@@ -211,6 +221,7 @@ public class Interface {
 	}
 
 	private static void SignInInterface(User user, Utilities utility) {
+		@SuppressWarnings("resource")
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 
 		Boolean exit = false;

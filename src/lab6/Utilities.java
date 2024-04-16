@@ -102,8 +102,7 @@ public class Utilities {
 	}
 
 	public int SignIn(String username, String password) {
-		// TODO
-		// ##NEED TO CHECK username in files to find match
+		// TODO Deal with Errors
 		List<String> usedUserNames = getAllAccountUsernames();
 		List<String> userNameAndPasswords = getAllPasswordsFromUsernames(usedUserNames);
 
@@ -111,12 +110,9 @@ public class Utilities {
 
 		String Username_Password = username + " " + password;
 		if (userNameAndPasswords.contains(Username_Password)) {
-			// good sign in
-			// TODO set SignedInFileName
 			SignedInFileName = MakeFileName(username, accountNumber);
 			return 1;
 		}
-
 		// Else return bad
 		return 0;
 
@@ -127,7 +123,6 @@ public class Utilities {
 	}
 
 	private String getAccountNumber(String username) {
-		// TODO THIS SHOULD WORK???
 		File folder = new File("Utilities/");
 		File[] listOfFiles = folder.listFiles();
 		if (listOfFiles != null) {
@@ -141,11 +136,9 @@ public class Utilities {
 	}
 
 	private List<String> getAllPasswordsFromUsernames(List<String> usedUserNames) {
-		// TODO Auto-generated method stub
-
-		// GET PASSWORDS FROM FILES
-		// STRING SHOULD BE "USERNAME PASSWORD"
+		// TODO Deal with Errors
 		File folder = new File("Utilities/");
+
 		File[] listOfFiles = folder.listFiles();
 		List<String> AccountNumbersList = new ArrayList<>();
 		if (listOfFiles != null) {
@@ -162,7 +155,6 @@ public class Utilities {
 									}
 								}
 							} catch (IOException e) {
-								// TODO Auto-generated catch block
 								e.printStackTrace();
 							}
 							AccountNumbersList.add(username + " " + password);
@@ -175,8 +167,7 @@ public class Utilities {
 	}
 
 	public int SignIn(int accountNumber, String password) {
-
-		// TODO WHAT AM I DOING
+		// TODO Deal with Errors
 		List<String> usedUserNames = getAllAccountUsernames();
 		List<String> userNameAndPasswords = getAllPasswordsFromUsernames(usedUserNames);
 
@@ -195,7 +186,6 @@ public class Utilities {
 	}
 
 	private String getUserName(String accountNumber) {
-		// TODO THIS SHOULD WORK???
 		File folder = new File("Utilities/");
 		File[] listOfFiles = folder.listFiles();
 		if (listOfFiles != null) {
