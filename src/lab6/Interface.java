@@ -179,14 +179,14 @@ public class Interface {
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
 							+ " AccountNumber: " + SignedIn);
 					exit = false;
-					SignInInterface(user);
+					SignInInterface(user,ultility);
 				} catch (NumberFormatException e) {
 					System.out.println("Username: " + Username + "\n" + "Password: " + Password);
 					SignedIn = ultility.SignIn(Username, Password);
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
 							+ " AccountNumber: " + SignedIn);
 					exit = false;
-					SignInInterface(user);
+					SignInInterface(user,ultility);
 				}
 
 			} else if (temp == 2) {
@@ -210,7 +210,7 @@ public class Interface {
 		ultility.SignOut();
 	}
 
-	private static void SignInInterface(User user) {
+	private static void SignInInterface(User user, Utilities utility) {
 		Scanner myObj = new Scanner(System.in); // Create a Scanner object
 
 		Boolean exit = false;
@@ -219,11 +219,12 @@ public class Interface {
 					"Ulilities\n Enter 1 for Bill History, 2 for Check Next Bill, 3 To Pay Bill, -1 to Sign Out");
 			int choice = myObj.nextInt();
 			if (choice == 1) {
-				// TODO
+				System.out.println(utility.checkBillHistory());
 			} else if (choice == 2) {
-				// TODO
+				System.out.println(utility.checkCurrentBill());
 			} else if (choice == 3) {
-				// TODO
+				String BillPayed = utility.payBill(user);
+				System.out.println(BillPayed);
 			} else if (choice == -1) {
 				System.out.println("Signed Out");
 				break;

@@ -155,8 +155,8 @@ public class Utilities {
 						if (listOfFiles[i].getName().contains(username)) {
 							String password = null;
 							try {
-								for (String line : Files.readAllLines(Paths.get("Utilities/"+listOfFiles[i].getName()),
-										StandardCharsets.UTF_8)) {
+								for (String line : Files.readAllLines(
+										Paths.get("Utilities/" + listOfFiles[i].getName()), StandardCharsets.UTF_8)) {
 									if (line.contains("Password")) {
 										password = line.split(" ")[1];
 									}
@@ -248,20 +248,21 @@ public class Utilities {
 		return CurrentBill;
 	}
 
-	public String payBill(int accountNumber, User user) {
+	public String payBill(User user) {
 		// Get Current Bill Balance
 		int CurrentBill = 0;
 		try {
 			for (String line : Files.readAllLines(Paths.get(SignedInFileName), StandardCharsets.UTF_8)) {
 				if (line.contains("Next Bill")) {
-					CurrentBill = Integer.valueOf(line.split(" ")[1]);
-				} else {
-					return "There is no Outstanding Bill for you to pay";
+					CurrentBill = Integer.valueOf(line.split(" ")[2]);
+					break;
 				}
-
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+		}
+		if (CurrentBill == 0) {
+			return "There is no Outstanding Bill for you to pay";
 		}
 		// TODO Check if Balance is able to pay
 		user.checkingAccount.payBill(CurrentBill);
@@ -271,10 +272,10 @@ public class Utilities {
 			for (String line : Files.readAllLines(Paths.get(SignedInFileName), StandardCharsets.UTF_8)) {
 				if (line.contains("Next Bill")) {
 					newLines.add("Next Bill: ");
-					CurrentBillOutput = line;
+					CurrentBillOutput = line.split(" ")[2];
 				} else if (line.contains("Due Date")) {
 					newLines.add("Due Date: ");
-					CurrentBillOutput = CurrentBillOutput + line;
+					CurrentBillOutput = CurrentBillOutput + " " + line.split(" ")[2];
 				} else if (line.contains("Bill History")) {
 					newLines.add(line);
 					newLines.add("Payed " + CurrentBillOutput);
@@ -286,10 +287,10 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		try {
-			Files.write(Paths.get("SignedInFileName"), newLines, StandardCharsets.UTF_8);
+			Files.write(Paths.get(SignedInFileName), newLines, StandardCharsets.UTF_8);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return null;
+		return CurrentBillOutput;
 	}
 }
