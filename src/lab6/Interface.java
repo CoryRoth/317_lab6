@@ -36,7 +36,7 @@ public class Interface {
 				// SHOW Deposit Interface
 				BalanceInterface(user);
 			}
-			if (choice == 1) {
+			else if (choice == 1) {
 				// SHOW Deposit Interface
 				DepositInterface(user);
 			} else if (choice == 2) {
@@ -75,13 +75,11 @@ public class Interface {
 			} else if (choice == 2) {
 				System.out.println("Savings Balance: " + user.savingsAccount.getBalance());
 			} else if (choice == -1) {
-				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
-		myObj.close();
 	}
 
 	private static void TransferInterface(User user) {
@@ -108,7 +106,6 @@ public class Interface {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
-		myObj.close();
 	}
 
 	private static void WithrawInterface(User user) {
@@ -124,13 +121,11 @@ public class Interface {
 				int amount = myObj.nextInt();
 				user.checkingAccount.withdraw(amount);
 			} else if (choice == -1) {
-				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
-		myObj.close();
 	}
 
 	private static void DepositInterface(User user) {
@@ -152,7 +147,6 @@ public class Interface {
 				int amount = myObj.nextInt();
 				user.savingsAccount.deposit(amount);
 			} else if (choice == -1) {
-				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
@@ -162,12 +156,12 @@ public class Interface {
 
 	private static void UtilitesInterface(User user) {
 		Utilities ultility = new Utilities();
-		Scanner myObj = new Scanner(System.in); // Create a Scanner object
+		 // Create a Scanner object
 
 		Boolean exit = false;
 		while (!exit) {
 			System.out.println("Enter 1 to SignIn, 2 to Create a new Account, -1 to exit");
-
+			Scanner myObj = new Scanner(System.in);
 			// TODO INPUT Validation
 			Integer temp = myObj.nextInt(); // Read user input
 			if (temp == 1) {
@@ -184,14 +178,14 @@ public class Interface {
 					SignedIn = ultility.SignIn(accountnumber, Password);
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
 							+ " AccountNumber: " + SignedIn);
-					exit = true;
+					exit = false;
 					SignInInterface(user);
 				} catch (NumberFormatException e) {
-					// TODO CHECK SIGN IN
+					System.out.println("Username: " + Username + "\n" + "Password: " + Password);
 					SignedIn = ultility.SignIn(Username, Password);
 					System.out.println("Signed in \nUsername: " + Username + " Password: " + Password
 							+ " AccountNumber: " + SignedIn);
-					exit = true;
+					exit = false;
 					SignInInterface(user);
 				}
 
@@ -208,13 +202,12 @@ public class Interface {
 			} else if (temp == -1) {
 				exit = false;
 				System.out.println("Exited");
-				myObj.close();
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
-		myObj.close();
+		ultility.SignOut();
 	}
 
 	private static void SignInInterface(User user) {
@@ -232,14 +225,12 @@ public class Interface {
 			} else if (choice == 3) {
 				// TODO
 			} else if (choice == -1) {
-				myObj.close();
 				System.out.println("Signed Out");
 				break;
 			} else {
 				System.out.println("You entered an incorrect Value.");
 			}
 		}
-		myObj.close();
 	}
 
 }

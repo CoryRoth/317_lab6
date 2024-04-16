@@ -12,7 +12,6 @@ import java.util.Random;
 
 public class Utilities {
 
-	private String SignedInAccountNum;
 	private String SignedInFileName;
 
 	public Utilities() {
@@ -115,7 +114,6 @@ public class Utilities {
 			// good sign in
 			// TODO set SignedInFileName
 			SignedInFileName = MakeFileName(username, accountNumber);
-			SignedInAccountNum = accountNumber;
 			return 1;
 		}
 
@@ -157,7 +155,7 @@ public class Utilities {
 						if (listOfFiles[i].getName().contains(username)) {
 							String password = null;
 							try {
-								for (String line : Files.readAllLines(Paths.get(SignedInFileName),
+								for (String line : Files.readAllLines(Paths.get("Utilities/"+listOfFiles[i].getName()),
 										StandardCharsets.UTF_8)) {
 									if (line.contains("Password")) {
 										password = line.split(" ")[1];
@@ -170,11 +168,10 @@ public class Utilities {
 							AccountNumbersList.add(username + " " + password);
 						}
 					}
-					// return listOfFiles[i].getName().split("_")[1];
 				}
 			}
 		}
-		return null;
+		return AccountNumbersList;
 	}
 
 	public int SignIn(int accountNumber, String password) {
@@ -189,7 +186,6 @@ public class Utilities {
 		String Username_Password = userName + " " + password;
 		if (userNameAndPasswords.contains(Username_Password)) {
 			SignedInFileName = MakeFileName(userName, accountNum);
-			SignedInAccountNum = accountNum;
 			return 1;
 		}
 
@@ -214,7 +210,6 @@ public class Utilities {
 
 	public void SignOut() {
 		SignedInFileName = null;
-		SignedInAccountNum = null;
 	}
 
 	public String checkBillHistory() {
