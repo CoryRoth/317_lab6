@@ -66,6 +66,7 @@ public class CheckingAccount {
 	public void deposit(int value) {
 		if (BalanceForDay + value <= MaxDepositPerDay) {
 			this.balance += value;
+			BalanceForDay += value;
 
 			// Write to file
 			WriteBalance(value, false);

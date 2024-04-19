@@ -6,16 +6,6 @@ import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
 class UserTest {
-	
-	@Before
-	void SetUpUsers()
-	{
-		System.out.println("Here");
-		if(User.isNewUser("coryroth"))
-		{
-			new User("coryroth");
-		}
-	}
 
 	@Test
 	void isNewUserFalseWhenUserExistsTest() {
@@ -23,5 +13,11 @@ class UserTest {
 		boolean userIsNew = User.isNewUser("coryroth");
 		assertFalse(userIsNew);
 	}
-
+	
+	@Test
+	void isNewUserTrueWhenUserDoesNotExistTest()
+	{
+		boolean userIsNew = User.isNewUser("NotAUsedUserName");
+		assertTrue(userIsNew);
+	}
 }
