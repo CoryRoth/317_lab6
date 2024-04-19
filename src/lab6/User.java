@@ -56,12 +56,12 @@ public class User {
 			for (int i = 0; i < listOfFiles.length; i++) {
 				if (listOfFiles[i].isFile()) {
 					if (listOfFiles[i].getName().split(".txt")[0].equals(name)) {
-						return true;
+						return false;
 					}
 				}
 			}
 		}
-		return false;
+		return true;
 	}
 
 	private void createUserFiles(String filename) {
