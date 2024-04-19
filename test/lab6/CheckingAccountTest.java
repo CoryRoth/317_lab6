@@ -69,7 +69,37 @@ class CheckingAccountTest {
 	}
 	
 	@Test
-	void overdraftFails() {
+	void withdrawlValidAmount() {
+		EmptyCheckings();
+		testUser.checkingAccount.deposit(200);
+		int startingBalance = testUser.checkingAccount.getBalance();
+		testUser.checkingAccount.withdraw(50);
+		int newBalance = testUser.checkingAccount.getBalance();
+		assertEquals(newBalance, startingBalance - 50);
+	}
+	
+	@Test
+	void withdrawlMaxAmount() {
+		EmptyCheckings();
+		testUser.checkingAccount.deposit(CheckingAccount.MaxWithdrawPerDay + 5);
+		int startingBalance = testUser.checkingAccount.getBalance();
+		testUser.checkingAccount.withdraw(CheckingAccount.MaxWithdrawPerDay);
+		int newBalance = testUser.checkingAccount.getBalance();
+		assertEquals(newBalance, startingBalance - CheckingAccount.MaxWithdrawPerDay);
+	}
+	
+	@Test
+	void withdrawlOverMaxAmountFails() {
+		EmptyCheckings();
+		testUser.checkingAccount.deposit(CheckingAccount.MaxWithdrawPerDay + 10);
+		int startingBalance = testUser.checkingAccount.getBalance();
+		testUser.checkingAccount.withdraw(CheckingAccount.MaxWithdrawPerDay + 1);
+		int newBalance = testUser.checkingAccount.getBalance();
+		assertEquals(newBalance, startingBalance);
+	}
+	
+	@Test
+	void withdrawlOverdraftFails() {
 		EmptyCheckings();
 		testUser.checkingAccount.deposit(100);
 		int startingBalance = testUser.checkingAccount.getBalance();
