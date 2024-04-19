@@ -26,7 +26,7 @@ public class Interface {
 		while (!exit) {
 			// Login
 
-			// Show interface to seelct possibile action
+			// Show interface to select possible action
 			// Deposit, Withdraw, Transfer, Utilities
 			System.out.println(
 					"What action would you like to do?\n 0 to Check Balance, 1 for Deposit, 2 for Withdraw, 3 for transfer, 4 to access Utilities Screen, -1 to Exit");
