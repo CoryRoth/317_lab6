@@ -70,11 +70,26 @@ class CheckingAccountTest {
 	
 	@Test
 	void overdraftFails() {
-		//TODO
+		EmptyCheckings();
+		testUser.checkingAccount.deposit(100);
 		int startingBalance = testUser.checkingAccount.getBalance();
-		//testUser.checkingAccount.deposit(CheckingAccount.MaxDepositPerDay + 1);
+		testUser.checkingAccount.withdraw(101);
 		int newBalance = testUser.checkingAccount.getBalance();
 		assertEquals(newBalance, startingBalance);
+	}
+	
+	private void EmptyCheckings()
+	{
+		int balance = testUser.checkingAccount.getBalance();
+		
+		int withdrawsNeeded = balance/CheckingAccount.MaxWithdrawPerDay;
+		for(int i = 0; i < withdrawsNeeded; i++)
+		{
+			testUser.checkingAccount.newDay();
+			testUser.checkingAccount.withdraw(CheckingAccount.MaxWithdrawPerDay);
+		}
+		testUser.checkingAccount.newDay();
+		testUser.checkingAccount.withdraw(testUser.checkingAccount.getBalance());
 	}
 
 }

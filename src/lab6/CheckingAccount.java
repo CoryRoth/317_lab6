@@ -157,15 +157,21 @@ public class CheckingAccount {
 	}
 
 	public void withdraw(int value) {
-		// TODO CHECK FOR VALID INPUT
-		// TODO check for max deposit
-		if (WithdrawForDay + value <= MaxWithdrawPerDay) {
-			this.balance -= value;
-			WriteBalance(value, true);
-		} else {
-			System.out.println("Cannot Withdraw, Hit Limit on Deposit For Day");
+		if(value <= balance)
+		{
+			if (WithdrawForDay + value <= MaxWithdrawPerDay) {
+				this.balance -= value;
+				WriteBalance(value, true);
+			} 
+			else {
+				
+				System.out.println("Cannot Withdraw, Hit Limit on Deposit For Day");
+			}
 		}
-
+		else
+		{
+			System.out.println("Cannot Withdraw, Insufficient Funds");
+		}
 	}
 
 	public int transfer(int value) {
