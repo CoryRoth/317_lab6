@@ -161,6 +161,7 @@ public class CheckingAccount {
 		{
 			if (WithdrawForDay + value <= MaxWithdrawPerDay) {
 				this.balance -= value;
+				WithdrawForDay += value;
 				WriteBalance(value, true);
 			} 
 			else {
@@ -174,7 +175,7 @@ public class CheckingAccount {
 		}
 	}
 
-	public int TransferToSavings(int value) {
+	public int transfer(int value) {
 
 		if (balance - value < 0) {
 			return -1;

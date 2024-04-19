@@ -81,6 +81,7 @@ class CheckingAccountTest {
 	@Test
 	void withdrawlMaxAmount() {
 		EmptyCheckings();
+		testUser.checkingAccount.newDay();
 		testUser.checkingAccount.deposit(CheckingAccount.MaxWithdrawPerDay + 5);
 		int startingBalance = testUser.checkingAccount.getBalance();
 		testUser.checkingAccount.withdraw(CheckingAccount.MaxWithdrawPerDay);

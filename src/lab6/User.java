@@ -84,12 +84,28 @@ public class User {
 	public void transfer(int amount, Boolean CheckingsToSavings) {
 		
 		if (CheckingsToSavings) {
-			this.checkingAccount.TransferToSavings(-amount);
-			this.savingsAccount.transferToChecking(amount);
+			if(amount > checkingAccount.getBalance())
+			{
+				System.out.println("Insufficient funds for transfer");
+				return;
+			}
+			this.checkingAccount.transfer(-amount);
+			this.savingsAccount.transfer(amount);
 		} else {
-			this.checkingAccount.TransferToSavings(amount);
-			this.savingsAccount.transferToChecking(-amount);
+			if(amount > SavingsAccount.MaxTransferPerDay)
+			{
+				System.out.println("Transfer is too large");
+				return;
+			}
+			if(amount > savingsAccount.getBalance())
+			{
+				System.out.println("Insufficient funds for transfer");
+				return;
+			}
+			this.checkingAccount.transfer(amount);
+			this.savingsAccount.transfer(-amount);
 		}
 
 	}
+	
 }

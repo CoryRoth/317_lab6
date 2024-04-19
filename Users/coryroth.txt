@@ -1,6 +1,6 @@
-Checking Balance: 20
-Savings Balance: 50
-CheckingDay Balance: 200
-CheckingDay Withdraw: 100
-SavingsDay Balance: 0
-TransferDay Amount: 50
+Checking Balance: 400
+Savings Balance: 200
+CheckingDay Balance: 14310
+CheckingDay Withdraw: 1701
+SavingsDay Balance: 600
+TransferDay Amount: -100

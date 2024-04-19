@@ -137,7 +137,7 @@ public class SavingsAccount {
 		return this.balance;
 	}
 
-	public int transferToChecking(int amount) {
+	public int transfer(int amount) {
 
 		if (TransferForDay + amount <= MaxTransferPerDay) {
 			if (balance - amount < 0) {
