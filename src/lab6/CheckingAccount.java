@@ -174,7 +174,7 @@ public class CheckingAccount {
 		}
 	}
 
-	public int transfer(int value) {
+	public int TransferToSavings(int value) {
 
 		if (balance - value < 0) {
 			return -1;

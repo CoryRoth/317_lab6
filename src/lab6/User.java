@@ -84,11 +84,11 @@ public class User {
 	public void transfer(int amount, Boolean CheckingsToSavings) {
 		
 		if (CheckingsToSavings) {
-			this.checkingAccount.transfer(-amount);
-			this.savingsAccount.transfer(amount);
+			this.checkingAccount.TransferToSavings(-amount);
+			this.savingsAccount.transferToChecking(amount);
 		} else {
-			this.checkingAccount.transfer(amount);
-			this.savingsAccount.transfer(-amount);
+			this.checkingAccount.TransferToSavings(amount);
+			this.savingsAccount.transferToChecking(-amount);
 		}
 
 	}

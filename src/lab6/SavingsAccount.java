@@ -97,6 +97,7 @@ public class SavingsAccount {
 		// TODO check for max deposit
 		if (BalanceForDay + value <= MaxDepositPerDay) {
 			this.balance += value;
+			BalanceForDay += value;
 
 			// Write to file
 			WriteBalance(value);
@@ -136,14 +137,14 @@ public class SavingsAccount {
 		return this.balance;
 	}
 
-	public int transfer(int amount) {
+	public int transferToChecking(int amount) {
 
 		if (TransferForDay + amount <= MaxTransferPerDay) {
-
-			if (balance + amount < 0) {
+			if (balance - amount < 0) {
 				return -1;
 			}
 			this.balance += amount;
+			TransferForDay += amount;
 			WriteBalance(amount, true);
 			return 0;
 		} else {
