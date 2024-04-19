@@ -74,7 +74,6 @@ public class User {
 				fr.write("Savings Balance: " + 0 + "\n");
 				fr.close();
 			} else {
-				System.out.println("File already exists.");
 			}
 		} catch (IOException e) {
 			System.out.println("An error occurred.");
